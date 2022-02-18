@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title> 예제 </title>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+            const DefaultColor = "rgb(0,0,0)";
+
+            let timer = null;
+
+            function setAutoChangeColor(id) {
+                timer = setInterval(changeRGB, 1000, id);
+            }
+
+            function unsetAutoChangeColor(id) {
+                clearInterval(timer);
+                        
+                $("#" + id).css("color", DefaultColor);
+            }
+
+            function changeRGB(id) {
+                let R = getRandomCode();
+                let G = getRandomCode();
+                let B = getRandomCode();
+
+                var color = "rgb(" + R + "," + G + "," + B + ")";
+
+                $("#" + id).css("color", color);
+            }
+
+            function getRandomCode() {
+                return Math.round(Math.random() * 255);
+            }
+
+            $(document).ready(function() {
+                $("#t1")
+                    .mouseover(function() { setAutoChangeColor(this.id); })
+                    .mouseout(function() { unsetAutoChangeColor(this.id); });
+                $("#t2")
+                    .mouseover(function() { setAutoChangeColor(this.id); })
+                    .mouseout(function() { unsetAutoChangeColor(this.id); });
+            });
+           </script>
+    </head>
+
+    <body>
+        <h1 id="t1">text1</h1>
+        <h1 id="t2">text2</h1>
+    </body>
+</html>
